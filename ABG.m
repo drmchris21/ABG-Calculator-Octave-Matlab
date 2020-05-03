@@ -59,8 +59,9 @@ pCO2=input("pCO2? ");
 HCO3=input("HCO3? ");
 Na=input("Na? ");
 Cl=input("Cl? ");
+Alb=input("Albumine? ");
 AGAP=0;
-printf("ABG Calculator results for...\nPh=%d\npCO2=%d\nHCO3=%d\nNa=%d\nCl=%d\n",Ph,pCO2,HCO3,Na,Cl);
+printf("ABG Calculator results for...\nPh=%d\npCO2=%d\nHCO3=%d\nNa=%d\nCl=%d\nAlbumin=%d\n",Ph,pCO2,HCO3,Na,Cl,Alb);
 
 if HCO3==24 HCO3=24.01; end
 if Ph<7 || Ph>7.7
@@ -68,7 +69,7 @@ if Ph<7 || Ph>7.7
   return;
 end;
 
-AGAP=Na-Cl-HCO3;
+AGAP=Na-Cl-HCO3+2.5*(max(0,4.5-Alb));
 
 if Ph<7.35 && HCO3>26 acid1(); end
 if Ph<7.35 && HCO3<=26 && HCO3>=22 acid2(); end
@@ -118,6 +119,14 @@ if x<=-0.5 disp(abg(2,:));
 elseif x>=0.5 disp(abg(12,:));
 else disp(abg(1,:));
 end
+if AGAP<16 return end
+y=HCO3;
+if y==24 y=24.01; end
+x=(AGAP-12)/(24-y);
+if x<1 disp(abg(8,:));
+elseif x>2 disp(abg(9,:));
+else disp(abg(7,:));
+end
 end
 
 function Arac()
@@ -130,16 +139,6 @@ else disp(abg(5,:));
 end
 end
 
-function agap()
-if AGAP<16 return end
-y=HCO3;
-if y==24 y=24.01; end
-x=(AGAP-12)/(24-y);
-if x<1 disp(abg(8,:));
-elseif x>2 disp(abg(9,:));
-else disp(abg(7,:));
-end
-end
 
 function alc1()
 disp(abg(13,:));
@@ -185,3 +184,4 @@ end
 end
 
 end
+
