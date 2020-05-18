@@ -133,9 +133,9 @@ function Arac()
 y=pCO2;
 if y==40 y=40.01; end
 x=(10^(9-Ph)-10^1.6)/(y-40);
-if x>0.8 disp(abg(4,:));
+if x>0.8 disp(abg(5,:));
 elseif x<0.3 disp(abg(6,:));
-else disp(abg(5,:));
+else disp(abg(4,:));
 end
 end
 
