@@ -40,7 +40,7 @@ persistent abg=[
 "Metabolic Acidosis with Anion Gap",
 "Metabolic Acidosis with Anion Gap and Acidosis without Anion Gap",
 "Metabolic Acidosis with Anion Gap and Metabolic Acidosis",
-"Compensated Metabolic Acidosis",
+"Compensated Metabolic Alcalosis",
 "Metabolic Acidosis and Respiratory Acidosis",
 "Metabolic Alcalosis and Respiratory Alcalosis",
 "Partially Compensated Respiratory Alcalosis",
@@ -69,7 +69,7 @@ if Ph<7 || Ph>7.7
   return;
 end;
 
-AGAP=Na-Cl-HCO3+2.5*(max(0,4.5-Alb));
+AGAP=Na-Cl-HCO3+2.3*(max(0,4.5-Alb));
 
 if Ph<7.35 && HCO3>26 acid1(); end
 if Ph<7.35 && HCO3<=26 && HCO3>=22 acid2(); end
@@ -156,7 +156,7 @@ Amalc();
 end
 
 function alc4()
-disp(abg(3,:));
+disp(abg(12,:));
 Aralc();
 end
 
@@ -177,11 +177,10 @@ end
 
 function Amalc()
 x=0.7*HCO3+21-pCO2;
-if x<-5 disp(abg(11,:));
+if x<-5 disp(abg(3,:));
 elseif x>5 disp(abg(12,:));
 else disp(abg(10,:));
 end
 end
 
 end
-
